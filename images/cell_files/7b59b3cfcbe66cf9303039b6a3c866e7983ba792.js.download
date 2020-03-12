@@ -1,0 +1,7 @@
+var dwReportSuiteIDPrimary = 'pumastore' //update
+var dwReportSuiteID = dwReportSuiteIDPrimary + '' // change out dwReportSuiteIDPrimary for primary name, prevent code conflict with Webalyse's stuff.
+
+var dwCharSet = 'ISO-8859-1'
+var dwLinkFilters = 'javascript:,us.puma.com,staging-na02-puma.demandware.net'
+var dwTimeZoneGMT = '-5'
+var dwSiteID = 'US Shop'

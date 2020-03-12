@@ -1,0 +1,56 @@
+
+
+	
+
+
+// Client LiveChat Settings
+// This file should be hosted by and modified by the client.
+window.liveChatClientSettings = {
+  endChat: { // Settings related to chat-end
+    callback: null // Callback function to run when the chat session was ended by the agent or user
+  },
+  favIcon: { // Favicon settings
+    type: 'image/png', // The type of favicon (E.g. image/png)
+    url: 'http://puma.com/favicon.ico' // The URL to the favicon
+  },
+  inChat: { // Settings related to the in-chat window
+    callback: null, // Callback function to run when the in-chat window is loaded
+    headline: "", // The headline text to display
+    loadingText: "Thanks for contacting us. An operator will be with you shortly...",
+    messages: { // Settings related to chat messages
+      animate: true, // Turn on/off chat message animation
+      animationClass: "bounceIn", // The class to use for chat message animation
+      animationTime: 0.6, // How long to run the animation (false for default)
+      customClasses: "", // Additional classes to add to chat messages
+      callback: null // Callback function to run when a chat message is sent/received
+    },
+    subText: "" // The text to display below the headline text (empty if none)
+  },
+  jQuery: '//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js', // jQuery 1.7.2+ is required. Specify which file you want to use, if not already included.
+  preChat: { // Settings related to the pre-chat window
+    callback: null, // Callback function to run when the pre-chat window is loaded
+    headline: "Welcome", // The headline text to display (empty if none)
+    subText: "Thanks for contacting us! We’re here to help with any questions you might have." // The text to display below the headline text (empty if none)
+  },
+  title: "PUMA Live Chat", // The browser title
+  validation: { // Settings related to field validation
+    errors: { // Settings related to field validation errors
+      animate: true, // Turn on/off field error animation
+      animationClass: "flipInX", // The class to use for field error animation
+      animationTime: false, // How long to run the animation (false for default)
+      customClasses: "", // Additional classes to add to field errors
+      callback: null // Callback function to run when there are field errors
+    }
+  },
+  windowHeight: 587, // The height of the popup chat window
+  windowWidth: 400 // The width of the popup chat window
+};
+
+if ($('.livechat-online').css('display') == 'none') {
+            $('.livechat-offline').hide();
+
+         }else {
+           $('.livechat-offline').show();
+
+         }<!-- dwMarker="content" dwContentID="14dba991b7f2d8926f8f535d0d" -->
+

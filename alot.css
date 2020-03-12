@@ -1,0 +1,983 @@
+body{
+    padding-top: 0;
+    margin: 0;
+    top: 0;
+   overflow-x: hidden;
+}
+
+*
+{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.one{
+    color: cornflowerblue;
+}
+.submit{
+    background-color: darkblue;
+    height: 40px;
+    width: 200px;
+    border-radius: 30px;
+    outline: none;
+    color: white;
+}
+
+
+.headtop{
+        height:30px;
+        display: grid;
+        grid-template-columns: 2.2fr 0.9fr;
+        grid-template-areas: "small login";   
+        background-color: rgb(5, 15, 44);
+        color: white;
+        text-align: center;
+        padding-bottom: 30px;
+    }
+    .small{
+        grid-area: small;
+        padding-left: 38%;
+    }
+    .small h5{
+        font-weight:600;
+        font-display: Roboto;
+        font-size: 17px;
+        letter-spacing: 1px;
+    }
+    /* This is the login section */
+    .google{
+        color: white;
+        background-color: rgb(241, 68, 68);
+        border-radius: 3px;
+        width: 315px;
+        height: 35px;
+        border: none;
+    }
+    
+    .login{
+        grid-area: login;
+        display: grid;
+        grid-template-areas: "cart  profile register";
+        grid-template-columns:1fr 2fr 1fr;
+        text-align: center; 
+        
+    }
+    span{
+        padding-left: 2px;
+    }
+    
+    .login h6{
+        font-family:Roboto;
+        font-weight: 400;
+        font-size: 13px;
+    }
+    .login div:hover{
+        color: rgb(132, 161, 189);
+    }
+    .cart{
+        grid-area:cart;
+        
+        
+    }
+    #span{
+        margin-right: 3px;
+    }
+    .profile{
+         text-align: right;
+         margin-right: 15px;
+        grid-area: profile;
+    }
+
+    /* Login and sign in forms */
+    .register{
+        grid-area: register;
+        position: relative;
+    }
+
+    .losi{
+        height: 150px;
+        width: 120px;
+        background-color: rgb(22, 35, 65);
+        border-radius: 3px;
+        border: rgb(116, 124, 129) 0.5px solid;
+        text-align: left;
+        text-align:center;
+        z-index: 1000;
+        display: none;
+        margin-top: -30px;
+        padding-bottom: -30px;
+    }
+    
+    /* The signup form */
+    .signupform{
+        display:block;
+        border: 4px solid rgb(39, 39, 51);
+        border-radius: 2px;
+        margin:0px 370px 0px 370px;
+        padding: 50px 0px 50px 0px;
+        text-align: center;
+    }
+    .divsign{
+        height:120vh;
+        margin-top:15vh;
+    
+    }
+    .signupform input{
+        height: 30px;
+        width: 300px;
+        color: rgb(8, 41, 71);
+        padding-left: 10px;
+        letter-spacing:0.5px;
+        padding-bottom: 3px;
+        outline-color: rgb(14, 34, 70);
+      
+    }
+    /*signup button */
+    .signup{
+
+        color: rgb(245, 245, 245);
+        height: 40px;
+        width: 315px;
+        border:none;
+        outline:none;
+        margin-top: 30PX;
+        background-color: rgb(14, 34, 70);
+        border-radius: 2px;
+    }
+    .signup:hover{
+        background-color: rgb(46, 64, 85);
+        transition: ease-in-out 400ms;
+    }
+    #titlesign{
+        text-align: center;
+       color: rgb(138, 151, 190);
+       background-color: rgb(21, 39, 58);
+       line-height: 50px;
+       margin:0px 370px 0px 370px;
+       word-spacing: 5px;
+       font-weight: 500;
+       border-radius:2px;
+       margin-bottom: -2px;
+       margin-top: 60px;
+    }
+    
+    
+    /* The login form */
+    
+    .loginform{
+        display:block;
+        border: 0.5px solid rgb(190, 190, 211);
+        border-radius: 2px;
+        margin:10px 10px 10px 10px;
+        padding: 50px 0px 50px 0px;
+        margin-top: 20px;
+        text-align: center;
+    }
+    .divlog{
+        height: 120vh;
+        margin-top:15vh;
+        
+    }
+    .loginform input{
+        height: 30px;
+        width: 300px;
+        color: rgb(10, 42, 83);
+        padding-left:10px;
+        letter-spacing: 1px;
+        padding-bottom: 2px;
+    
+    }
+    /*login button */
+    .loglog{
+        color: rgb(245, 245, 245);
+        height: 40px;
+        width: 315px;
+        border:none;
+        outline:none;
+        margin-top:30px;
+        background-color: rgb(14, 34, 70);
+        border-radius: 2px;
+    }
+    .loglog:hover{
+        background-color: rgb(46, 64, 85);
+        transition: ease-in-out 400ms;
+    }
+    #titlelog{
+       color: rgb(242, 243, 247);
+       background-color: rgb(16, 33, 58);
+       line-height: 50px;
+       margin:10px 10px 10px 10px;
+       font-weight: 500;
+       border: solid 0.5px rgb(250, 251, 252);
+       border-radius:3px;text-align: center;
+    }
+    .cont{
+        border: 2px solid rgb(141, 138, 138);
+        margin:0px 300px 0px 300px;
+        border-radius: 3px;
+    }
+    .ilog{
+        color: rgb(14, 34, 70);
+        text-align: center;
+    }
+    
+    input{
+       text-align:left;
+    }
+    
+    /* the profile page */
+    .profile-page{
+       text-align: center;
+       margin: 50px 0px 50px 0px;
+    }
+    .profile-page input{
+        height: 30px;
+        width: 400px;
+        border: none;
+        outline: none;
+        padding-left: 10px;
+        border-bottom: 0.68px solid rgb(22, 124, 131);
+    }
+    .edit{
+        margin-top: 20px;
+        color: rgb(19, 133, 148);
+        background-color: transparent;
+        border: none;
+        font-size: 16px;
+        text-decoration: underline;
+    }
+    .profile-page i{
+        font-size: 50px;
+        border-bottom: solid 3px rgb(5, 3, 3);
+        border-radius: 30px;
+        padding: 15px;
+        text-align: center;
+        color: rgb(10, 92, 92);
+    }
+
+
+/* THIS IS THE BOTTOM OF THE HEADER */
+.headbottom{
+    text-align: center;
+    font-family: Roboto;
+    color: whitesmoke;
+    border-top: 0.5px solid rgb(83, 83, 87);
+    display: grid;
+    grid-template-areas:"logo navbar search";
+    grid-template-columns: 1fr 1.8fr 1.1fr;
+    background-color: rgb(5, 15, 44);
+    z-index: 100;
+    height: 80px;
+}
+.logo{
+    grid-area: logo;
+    padding-right: 45%; 
+}
+.logo h3{
+    font-weight: 1000;
+    font-size: 25px;
+}
+
+.navbar{
+    grid-area: navbar;
+}
+.navbar ul li{
+    list-style: none;
+    display: inline-block;
+    position: relative;
+    font-family: Roboto;
+    font-weight: 400;
+    font-size:14px;
+    padding: 14.5px 17px; 
+}
+/* men drop-down menu */
+.men{
+    position: relative;
+}
+.dropmen{
+    position: absolute;
+    display:grid;
+    z-index: 0;
+    grid-template-areas: "menlist menim";
+    grid-template-columns: 40% 60%;
+    background-color: rgb(22, 12, 63);
+    height: 250px;
+    width: 400px;
+    margin-top: 24.5px;
+    border:0.1px solid rgb(40, 47, 70);
+}
+.menlist{
+    grid-area: menlist;
+    padding: 0px 20px 10px 20px;
+}
+.menim{
+    grid-area: menim;
+    padding: 10px 10px 10px 0px;
+    
+}
+.menim img{
+    width: 100%;
+    height: 100%;
+}
+.menlist p{
+    text-align: left; 
+    color: rgb(157, 174, 211);  
+    padding-top: 7px;
+}
+
+
+/* the women drop down */
+.women{
+    position: relative;
+}
+.dropwomen{
+    position: absolute;
+    display:grid;
+    z-index: 0;
+    grid-template-areas: "womenlist womenim";
+    grid-template-columns: 40% 60%;
+    background-color: rgb(22, 12, 63);
+    height: 250px;
+    width: 400px;
+    margin-top: 24.5px;
+    border:0.1px solid rgb(40, 47, 70);
+ 
+}
+.womenlist{
+    grid-area: womenlist;
+    padding: 0px 20px 10px 20px;
+}
+.womenim{
+    grid-area: womenim;
+    padding: 10px 10px 10px 0px;
+    
+}
+.womenim img{
+    width: 100%;
+    height: 80%;
+}
+.womenlist p{
+    padding-top: 7px;
+    text-align: left;  
+    color: rgb(164, 134, 192); 
+}
+
+
+a:active{
+    text-decoration: none;
+    color: white;
+  }
+  a:link{
+      color: white;
+      text-decoration: none;
+  }
+
+ul li.active a{
+    color:rgb(231, 241, 241);
+    border-bottom: solid 4px whitesmoke;
+    text-decoration: none;
+    padding-bottom: 21px;
+}
+ul li a:hover{
+   color: rgb(100, 137, 192);
+   text-decoration: none;
+}
+.login a{
+    color: white;
+}
+.login a:hover{
+    text-decoration: none;
+    color: rgb(100, 137, 192);
+}
+ul li :visited{
+    color: rgb(190, 202, 233);
+}
+
+
+.search{
+    grid-area: search;
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 22px;
+    
+}
+.search input{
+    background-color: ghostwhite;
+    border:0.5px solid ghostwhite;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    padding-left: 10px;
+    width: 230px;
+    height: 35px;
+    outline-color: transparent;
+    color: rgb(23, 22, 85);
+    position: relative;
+
+}
+input::placeholder{
+    font-size: 11px;
+    color: rgb(120, 118, 146);
+}
+.search button{
+    position: absolute;
+    background-color: ghostwhite;
+    border:0.5px solid ghostwhite;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    width: 35px;
+    height: 38px;
+    outline-color: transparent;
+    color:rgb(115, 112, 121); 
+}
+
+input:focus::placeholder{
+    color:transparent;
+}
+
+
+
+/* THIS IS THE FOOTER */
+.footer{
+    margin-top: 1px;
+    color: white;
+    grid-area: footer;
+    display: grid;
+    grid-template-rows: 1fr 250px 100px;
+    grid-template-areas: "foot-upper foot-upper"
+    "foot-middle foot-middle"
+    "foot-lower foot-lower";
+    background-color: rgb(5, 15, 44);
+    text-align: center;
+} 
+
+/* this is the footer upper */
+.foot-upper{
+    grid-area: foot-upper;
+    display: grid;
+    grid-template-areas: "language email";
+    grid-template-columns:  1fr 1fr ;
+}
+.email{
+    grid-area: email;
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-left: 300px;
+}
+.email input{
+    border: 0.5px solid rgb(109, 106, 106);
+    background-color: rgb(4, 4, 39);
+    height: 45px;
+    width: 260px;
+    padding-left:20px;
+    color: rgb(241, 239, 235);
+    border-radius: 0px;
+}
+.email input:hover{
+    border:1px solid rgb(54, 52, 52);
+}
+input:focus::placeholder{
+    color:rgb(174, 186, 240);
+}
+.language{
+    text-align: center;
+    grid-area: language;
+    padding-top: 25px;
+    font-size: 40px;
+} 
+
+.subm{
+    height: 45px;
+    border-radius: 1px;
+    border: 0.5px solid rgb(15, 45, 73);
+    background-color: rgb(15, 45, 73);
+    width: 285px;
+    color: white;
+    margin-top: 20px;
+    display: none;
+}
+
+/*this is the footer middle*/
+.foot-middle{
+    grid-area: foot-middle;
+    display: grid;
+    grid-template-areas: "box1 box2 box3 box4";
+    grid-template-columns: 25% 25% 25% 25%;
+    font-weight: bold;
+}
+
+.box1{
+    padding: 20px;
+    grid-area: box1;
+    border-bottom:0.2px solid rgb(59, 59, 59) ;
+    border-top:0.2px solid rgb(92, 90, 90);
+  }
+
+.box2{
+    padding: 20px;
+    grid-area: box2;
+    border-bottom:0.2px solid rgb(59, 59, 59) ;
+    border-top:0.2px solid rgb(92, 90, 90);
+  }
+
+  .box3{
+    padding: 20px;
+    grid-area: box3;
+    border-bottom:0.2px solid rgb(59, 59, 59) ;
+    border-top:0.2px solid rgb(92, 90, 90);
+  }
+  .box4{
+    border-top:0.2px solid rgb(92, 90, 90);
+    padding: 20px;
+    border-bottom:0.2px solid rgb(59, 59, 59) ;
+    grid-area: box4;
+  }
+
+
+.foot-middle ul li{
+    list-style: none;
+    padding-top: 10px;
+    margin-left:60px;
+    display: block;
+    text-align: left;
+    color: rgb(97, 95, 95);
+    font-style: roboto;
+    font-size: 11px;
+}
+.foot-middle i{
+    padding-top: 30px;
+    padding: 17px;
+    float: left;
+    font-size: 16px;
+    border-bottom: 1px solid rgb(28, 23, 41);
+}
+#fhd{
+    color: rgb(145, 217, 235);
+}
+.footer h5{
+    color: rgb(145, 217, 235);
+}
+
+
+
+/* this the foot lower*/ *
+ .foot-lower{
+    grid-area: foot-lower;
+    display: grid;
+    grid-template-areas: "pay copy rate"; 
+    grid-template-columns:  1fr 1fr 1fr;
+    padding-top: 20px;
+}
+
+.copy{
+    grid-area: copy;
+    padding-top: 10px;
+}
+.pay{
+    padding-left: 20px;
+    grid-area: pay;
+    justify-self: left;
+}
+.rate{
+    justify-self: right;
+    padding-right: 40px;
+}
+.pay i{
+    font-size: 18px;
+} 
+
+
+
+/* THE MAIN BODY CSS ..... */
+
+
+/*The slider division*/
+
+
+
+/* The slider section */
+.slider{
+    text-align: center;
+    border-top: 1px solid rgb(218, 210, 210);
+    border-bottom:solid 0.5px gray;
+    color:rgb(251, 252, 253);
+    font-family: -apple-system, BlinkMacSystemFont, 
+    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+     'Open Sans', 'Helvetica Neue', sans-serif;
+     font-size: 30px;
+     height: 72vh;
+     font-weight: 300px;
+     background-image:url(images/manmain.jpg);
+     
+}
+/* The list  panes for the slider */
+.swipes{
+    list-style: none;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+.swipe{
+ 
+  position: absolute;
+  display: none;
+}
+#sw1{
+
+    background-image: url(images/manu.png);
+    height: 100%;
+    width: 100%;
+}
+#sw2{
+    background-image: url(images/mart01.PNG);
+}
+#sw3{
+    background-image: url(images/leno.PNG);
+}
+#sw4{
+    background-image: url(images/france.PNG);
+}
+
+.swipe h4{
+    font-size: 50px;
+    font-weight: 800;
+    letter-spacing: -3px;
+    text-shadow: 0 0 3px black;
+}
+.swipe h5{
+    margin-left: 800px;
+    letter-spacing: 1px;
+    font-weight: 100;
+    color: rgb(178, 230, 240);
+    font-style: italic;
+}
+.swipe h6{
+ 
+    margin-right: 800px;
+    letter-spacing: 0.5px;
+    font-weight: 100;
+    color: rgb(243, 243, 243);
+}
+.slider h4{
+    margin-top: 10px;
+    font-size: 50px;
+    font-weight: 800;
+    letter-spacing: -3px;
+    text-shadow: 0 0 5px black; 
+}
+
+.slider h6{
+    margin-right: 800px;
+    letter-spacing: 0.5px;
+    font-weight: 100;
+    color: rgb(243, 243, 243);
+}
+/* slider back button */
+.dbl{
+    font-stretch: wider;
+    font-size: 30px;
+    font-weight: 50;
+    margin-left: 40px;
+    background-color: rgb(8, 21, 63);
+    color: rgb(241, 240, 250);
+    width: 50px;
+    height: 50px;
+    margin-left: 80%;
+    border: solid 0.5px white;
+    border-radius: 30px;
+    outline: none;
+    margin-bottom: -50px;
+}
+/* start slider button */
+.play{
+     font-size: 20px;
+     height: 60px;
+     width: 60px;
+     border-radius:100px;
+     color: rgb(53, 53, 148);
+     background-color: rgb(187, 190, 218);
+     outline: none;
+     border: white solid  0.5px;
+     font-weight: 100;
+     margin-top: 100px;
+     text-align: center;
+}
+.play:hover{
+    transform: scale(1.10);
+    transition: ease-in-out 800ms;  
+}
+
+
+
+#sota{
+    display: none;
+    opacity: 10;
+}
+#sota2{
+    display: none;
+}
+#sota3{
+
+    display: none;
+}
+#sota4{
+
+    display: none;
+}
+
+
+
+
+
+/* Trending products*/
+
+.trending{
+    grid-area: trending;
+    display:grid;
+    grid-template-columns: auto auto auto auto;
+    border-top: 0.5px solid whitesmoke;
+    height: 63vh;
+    grid-gap:10px;
+    padding-top: 30px;
+    margin:0px 10px 100px 10px;
+    color: rgb(18, 26, 26);
+}
+.trending-title{
+    font-size: 24px;
+    font-weight: 800;
+    padding: 100px 0px 0px 50px;
+}
+.trending img{
+    height: 23.5vw;
+    margin-top: 11px;
+    width: 23.5vw;
+    border-radius:2px;
+}
+
+.trend-card{
+    text-align: center;
+    border-bottom: solid 1px rgb(214, 221, 221);
+    border-radius: 3px;
+    color: black;
+
+}
+.trend-card:hover{
+    transition:.5s ease;
+    box-shadow: 0px 0px 1px 0px black;
+}
+.paragraph{
+    margin-top: -20px;
+    font-weight: 500;
+   
+}
+.price{
+    font-size: 22px;
+    font-weight: 300;
+    color: chocolate;
+}
+
+
+
+/* Recommended products */
+.recommended{
+    display:grid;
+    text-align: center;
+    grid-gap: 10px;
+    grid-template-columns: auto auto;
+    border-top: 0.5px solid rgb(230, 218, 218);
+    margin: 0px 20px  100px 20px;
+    height: 120vh;
+    color: rgb(17, 99, 99);
+    padding: 10px 10px 0px 10px;
+    border-bottom: 0.5px solid rgb(230, 218, 218);
+}
+.recommended img{
+   margin-top: 10px;
+   height: 85vh;
+   width: 45vw;
+
+   border-radius: 3px;
+}
+.recomm-card{
+    margin-top: 10px;
+}
+.recomm-title{
+    font-size: 24px;
+    font-weight: 800;
+    padding: 100px 0px 5px 50px;
+}
+
+
+
+
+  /* .brands{
+      height: 200px;
+      margin-top: 132px;
+  }
+  .about{
+      height: 200px;
+      margin-top: 132px;
+  } */
+
+
+
+  /* Products on offer */
+  .offers{
+      display: grid;
+      grid-template-columns: auto auto auto;
+      margin-bottom: 100px;
+      grid-gap: 11px;
+      background-color: white;
+      padding: 20px 20px 20px 20px;
+     
+  }
+  .offers-card{
+      text-align: center;
+     box-shadow: 1px 1px rgb(238, 235, 235);
+      border-radius: 5px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+  }
+
+  .offers h6{
+      padding-top: 5px;
+      font-weight: 100;
+      font-size:14px;
+      color: rgb(3, 13, 43);
+      font-family: Roboto;
+  }
+  .offers-title{
+    font-size: 24px;
+    font-weight: 800;
+    padding: 0px 0px 5px 40px;
+  }
+  .offers p{
+      color: rgb(206, 67, 17);
+  }
+
+ 
+.offers img{
+    height:31vw;
+    width:31vw;
+    border-radius: 1px;
+}
+.session-body{
+    background-color: rgb(164, 191, 214);
+    height: 550px;
+    text-align: center;
+    padding-top: 20px;
+    margin-top: 1px;
+}
+.bit{
+    background-color: rgb(4, 4, 43);
+    color: aliceblue;
+    outline: none;
+    border-radius: 30px;
+    height:7vh;
+    width: 12vw;
+    font-weight: 300;
+    border: 0.5px solid rgb(10, 42, 83);
+    text-align: center;
+}
+.bit:hover{
+    background-color: rgb(37, 51, 77);
+    transform: scale(1.03);
+    transition:.5s ease;
+}
+
+
+
+
+/* scroll to the top button */
+.To-top{
+    height: 35px;
+    width: 40px;
+    border-radius:4px;
+    color: rgb(218, 218, 233);
+    background-color: rgb(192, 100, 15);
+    outline: none;
+    border: white solid  0.5px;
+    position: fixed;
+    text-align: center;
+    bottom: 80px;
+    float: right;
+    font-weight: 100;
+    font-size: 20px;
+    margin-left: 95%;
+}
+
+
+.To-top:hover{
+    background-color: rgb(23, 87, 182);
+    color: whitesmoke;
+    transform: scale(1.05);
+    transition: ease-in-out 800ms;    
+}
+
+
+
+
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: rgb(5, 15, 44);
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: white; 
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: white; 
+}
+
+.breadcrumb {
+  padding: 0vw 0vw 0.4vw 1vw;
+  list-style: none;
+  background-color: whitesmoke;
+}
+.breadcrumb li {
+  display: inline;
+  font-size: 0.8vw;
+  color: black;
+}
+.breadcrumb li+li:before {
+  color: black;
+  content: "/\00a0";
+  padding: 0.5vw;
+}
+.breadcrumb li a {
+  color: black;
+  text-decoration: none;
+}
+.breadcrumb li a:hover {
+  color: grey;
+}
+
+.error
+{
+    color: green;
+    text-align: center;
+}
+
+
+
+
+
+.shop{
+    background-color: white;
+
+    color: rgb(14, 34, 70);
+    width: 150px;
+    height: 52px;
+    outline: none;
+    border-radius: 50px;
+    border:solid 1px gray;
+}

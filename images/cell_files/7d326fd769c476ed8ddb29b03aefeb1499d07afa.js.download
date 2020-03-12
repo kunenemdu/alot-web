@@ -1,0 +1,801 @@
+// Last edited: DJV 2018-03-08 16:13:00i
+var intSearchTerm
+var intSearchClick
+var adobePageType
+var adobePageEvents
+var adobeProdPageType
+var siteTranslationType
+=
+//capitalize //mod for capitalizing first letter of page names (missing from Europe)
+
+String.prototype.capitalize = function(){ // This provides proper Title Casing for pageName on PLPs
+  var i, j, str, lowers, uppers;
+  str = this.replace(/([^\W_]+[^\s-]*) */g, function(txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+
+  // Certain minor words should be left lowercase unless
+  // they are the first or last words in the string
+  lowers = ["the"];
+  for (i = 0, j = lowers.length; i < j; i++)
+    str = str.replace(new RegExp('\\s' + lowers[i] + '\\s', 'g'), 
+      function(txt) {
+        return txt.toLowerCase();
+      });
+
+  // Certain words such as initialisms or acronyms should be left uppercase
+  uppers = ['En', 'Us'];
+  for (i = 0, j = uppers.length; i < j; i++)
+    str = str.replace(new RegExp('\\b' + uppers[i] + '\\b', 'g'), 
+      uppers[i].toUpperCase());
+
+  return str.replace(/-%2b-/g," + "); // fixes encoded plus sign in pageName
+}
+
+String.prototype.replaceAll = function(str1, str2, ignore) 
+{
+    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
+} 
+
+//set tax rates by country - In the US/CA, items affected by this get pulled from the DL
+	function getVATRate () {
+		var countryAbbv = ["US", "CA"];
+        var countryTaxs = ["", ""];
+
+        cntryInput = pageData.navigation.customer.localeCountry
+        iNeedIndex = countryAbbv.indexOf(cntryInput);
+        countryTaxRate = countryTaxs[iNeedIndex];
+
+	  return countryTaxRate;
+	}
+	// Initialize: Run at page load
+	  pageData.navigation.customer.localeVAT = getVATRate();
+
+//Coming soon button
+function getButtonCallToAction(){
+    var pdpButtonCTA =  document.getElementsByClassName('add-to-cart btn btn-primary')[0]
+    if (pdpButtonCTA !== null)
+	    {
+	    var buttonCallToAction = document.getElementsByClassName('add-to-cart btn btn-primary')[0].innerHTML.trim();
+		if (buttonCallToAction == "Add to Bag"){
+			buttonCallToAction = "Available"
+		}
+	}
+	
+  return buttonCallToAction;
+};
+
+
+
+
+//functions to identify if the site is Motionpoint, then set content vars
+
+//Scripts to identify page types for the Motionpoint sites
+
+    if(window.location.href.indexOf("-eu.") > -1) {
+       //is a motionpoint site...
+       //console.log("is motionpoint1");
+       var siteTranslationType = "isMotionpoint"
+       adobeContentVars(siteTranslationType);
+    }
+    else if(window.location.href.indexOf("-be.") > -1) {
+       //is a motionpoint site...
+       //console.log("is motionpoint2");
+       var siteTranslationType = "isMotionpoint"
+       adobeContentVars(siteTranslationType);
+    }
+    else {
+    	//is a motionpoint site...
+       //console.log("is not Motionpoint");
+       var siteTranslationType = "notMotionpoint"
+       adobeContentVars(siteTranslationType);
+
+    };
+
+
+// create a function for motionpoint sites:
+function adobeContentVars(adobeProdPageType) {
+
+    if (siteTranslationType == "isMotionpoint") {
+		// do motionpoint stuff
+		//console.log(siteTranslationType);
+
+
+		//test for product detail page - has cgid= query string parameter
+		if(window.location.href.indexOf("cgid=") > -1) {
+		   //console.log("is a pdp");
+		   pagePath = " : Product Details"
+		   dirTier1 = "pd"
+		   dirTier2 = ""
+		   dirTier3 = ""
+		}
+		else {
+			// everything else
+			var pathArray = window.location.pathname.split( '/' );
+			var pagePath = "";
+			for (i = 3; i < pathArray.length; i++) {
+				  pagePath += " : ";
+				  pagePath += pathArray[i].replace(".html", "");
+				  }
+
+			if (typeof(pathArray[3]) == "undefined"){dirTier1 = "home"}
+			  else {dirTier1 = pathArray[3].replace(".html", "");}
+			if (pathArray[4]) {var dirTier2 = pathArray[4].replace(".html", "");}
+			if (pathArray[5]) {var dirTier3 = pathArray[5].replace(".html", "");}
+
+		}
+
+			var tempContentString = [pagePath,dirTier1,dirTier2,dirTier3];
+			return tempContentString;
+
+	}
+
+    else if (siteTranslationType == "notMotionpoint")  {
+        // do non-motionpoint stuff
+
+		var pathArray = window.location.pathname.split( '/' );
+		var pagePath = "";
+		for (i = 3; i < pathArray.length; i++) {
+			  pagePath += " : ";
+			  pagePath += pathArray[i].replace(".html", "");
+			  }
+
+		if (typeof(pathArray[3]) == "undefined"){dirTier1 = "home"}
+		  else {dirTier1 = pathArray[3].replace(".html", "");}
+		if (pathArray[4]) {var dirTier2 = pathArray[4].replace(".html", "");}
+		if (pathArray[5]) {var dirTier3 = pathArray[5].replace(".html", "");}
+
+		var tempContentString = [pagePath,dirTier1,dirTier2,dirTier3];
+		return tempContentString;
+
+    }
+    else {
+    // do nothing
+
+    };
+};
+var adobeContentArray = adobeContentVars();
+//console.log(adobeContentArray);
+//console.log(adobeContentArray[0]);
+// adobeContentArray[0-3] for standard deployment
+// adobeContentArray[3-6] to verify Checkout
+// adobeContentArray[2-5] to verify Home
+// testing PLP tiers, requires modifying isPLP
+pagePath = adobeContentArray[0].capitalize();
+//console.log(adobeContentArray[1]);
+dirTier1 = adobeContentArray[1]
+//console.log(adobeContentArray[2]);
+dirTier2 = adobeContentArray[2]
+//console.log(adobeContentArray[3]);
+dirTier3 = adobeContentArray[3]
+
+if (dirTier1 == "pd" ) {
+ //is product details page
+ intSearchNum = "";
+ var styleNumber = '';
+ var swatch = document.querySelector('.swatch__container.selected img');
+ if (typeof swatch !== 'undefined' && swatch !== null)
+ {swatch = swatch.src.split('/');styleNumber = swatch[4] + '_' + swatch[5];};
+    styleNumber = styleNumber.replace("_","-");
+    dirTier1 = "Product Details"
+    dirTier2 = pageData.items[0].productName;
+    dirTier3 = styleNumber
+    stuffInItems = ";" + styleNumber; //mod
+    productPageType = "productDetail";
+    adobePageEvents = "prodView,event1"
+    
+    //Nick's mod for PNA data integrity
+    adobePageName = dwSiteID + " : " + pageData.items[0].productName
+    
+
+	adobeButtonCTA = getButtonCallToAction();
+
+}
+else if (dirTier1 == "search" ) {
+    // var pageURL = window.location.href;
+    dirTier1 = "Internal Search"
+    adobePageEvents = "event2"
+    adobePageName = dwSiteID + " : " + dirTier1
+    
+    // set Internal Search results
+    var searchResultsNum = pageData.onsiteSearch.numberOfResults;
+    if (searchResultsNum != "0") {
+	   // set Internal Search Term
+       var address = new URL(window.location.href);
+       var intSearchTerm = pageData.onsiteSearch.searchTerm.toLowerCase();
+	   //
+	   intSearchNum = pageData.onsiteSearch.numberOfResults;
+	   productPageType = "productListing"
+	} else if (searchResultsNum == "0") {
+	    // set Internal Search Term
+       var address = new URL(window.location.href);
+       var intSearchTerm = pageData.onsiteSearch.searchTerm.toLowerCase();
+	   intSearchNum = "null";
+	   productPageType = "other";
+	}
+}
+
+else {
+    var isPLP = document.getElementsByClassName('refinement-bar__container');
+      if (isPLP.length > 0) {
+    	    //is product listing
+        	productPageType = "productListing";
+        	adobePageName = dwSiteID + pagePath;
+        	intSearchNum = ""
+        	//intSearchClick = $("input#search__input-desktop").val().toLowerCase();
+      }
+      else {
+        //is not a product listing
+        if (dirTier1 == "home"){
+    	  dirTier1 = "Home Page"
+    	  productPageType = "other"
+    	  adobePageName = dwSiteID + " : " + dirTier1;
+    	  //intSearchClick = $("input#search__input-desktop").val().toLowerCase();
+    	}
+		else if (dirTier1 == "cart" ) {
+    	  dirTier1 = "Checkout"
+    	  dirTier2 = "View Cart"
+    	  productPageType = "cart"
+    	  adobePageEvents = "scView,event7"
+    	  adobePageName = dwSiteID + " : " + dirTier1 + " : " + dirTier2;
+    	  //intSearchClick = $("input#search__input-desktop").val().toLowerCase();
+		}
+		else if (dirTier1 == "checkout" ) {
+		    //test if checkout or confirmation
+		    if (dirTier2 == "confirmed" ) {
+		      dirTier1 = "Checkout"
+  	      dirTier2 = "Order Confirmation"
+  	      productPageType = "orderConfirm"
+          if (pageData.order.promoCode !== undefined) { 
+  	        adobePageEvents = "purchase,event12,event21,event22,event25"   
+  	      } else {
+  	        adobePageEvents = "purchase,event12,event21,event22"   
+  	      }
+  	      
+  	      
+  	      adobePageName = dwSiteID + " : " + dirTier1 + " : " + dirTier2
+
+          //Payment type
+          var confirmPaymentType = '';
+        // if(document.getElementsByClassName("payment-method__name").length > 1) {
+        //    confirmPaymentType = document.getElementsByClassName("payment-method__name")[0].innerHTML.trim();
+        // }
+          
+          //mod
+        if(document.getElementsByClassName("payment-method__name").length == 1) {
+            if(document.getElementsByClassName("payment-method__name")[0].innerHTML.trim() != "PayPal") {
+                confirmPaymentType = document.getElementsByClassName("payment-method__name")[0].innerHTML.trim().replace(/\s/g,"_").toUpperCase();
+            }  else if(document.getElementsByClassName("payment-method__name")[0].innerHTML.trim() === "PayPal") {
+                confirmPaymentType = document.getElementsByClassName("payment-method__name")[0].innerHTML.trim();
+            }
+        }
+        
+        if(document.getElementsByClassName("payment-method__name").length == 2) {
+            if(document.getElementsByClassName("payment-method__name")[1].innerHTML.trim() != "PayPal") {
+                confirmPaymentType = document.getElementsByClassName("payment-method__name")[0].innerHTML.trim() + ',' + document.getElementsByClassName("payment-method__name")[1].innerHTML.trim();
+            }  else if(document.getElementsByClassName("payment-method__name")[0].innerHTML.trim() === "PayPal") {
+                confirmPaymentType = document.getElementsByClassName("payment-method__name")[0].innerHTML.trim().replace(/\s/g,"_").toUpperCase(); + ',' + document.getElementsByClassName("payment-method__name")[1].innerHTML.trim();
+            }
+        }
+          
+           if(document.getElementsByClassName("payment-method__name").length == 2) {
+            
+          }
+
+          //Shipping Type
+          var confirmShippingType = '';
+          if (document.getElementsByClassName("shipping-method-title").length > 0) {
+            confirmShippingType = document.getElementsByClassName("shipping-method-title")[0].innerHTML.trim();
+          }
+
+          //test if the addresses are the same
+          //Ship To variables
+  	      var shipAddressVars = '';
+          if (document.getElementsByClassName("summary-details shipping").length > 0) {
+            shipAddressVars = document.getElementsByClassName("summary-details shipping")[0];
+          }
+  	      var shipToAddress1 = '';
+          if (shipAddressVars.getElementsByClassName("address1").length > 0) {
+            shipToAddress1 = shipAddressVars.getElementsByClassName("address1")[0].innerHTML.trim();
+          }
+  	      var shipToSuite = '';
+          if (shipAddressVars.getElementsByClassName("suite").length > 0) {
+            shipToSuite = shipAddressVars.getElementsByClassName("suite")[0].innerHTML.trim();
+          }
+
+          var shipToCountry = '';
+          if (shipAddressVars.getElementsByClassName("countryCode").length > 0) {
+            shipToCountry = shipAddressVars.getElementsByClassName("countryCode")[0].innerHTML.trim();
+          }
+
+          var shipToPostCode = '';
+          if (shipAddressVars.getElementsByClassName("postalCode").length > 0) {
+            shipToPostCode = shipAddressVars.getElementsByClassName("postalCode")[0].innerHTML.trim();
+          }
+
+          //Bill To variables
+  	      var billAddressVars = '';
+          if (document.getElementsByClassName("summary-details billing-address").length > 0) {
+            billAddressVars = document.getElementsByClassName("summary-details billing-address")[0];
+          }
+  	      var billToAddress1 = '';
+          if (billAddressVars.getElementsByClassName("address1").length > 0) {
+            billToAddress1 = billAddressVars.getElementsByClassName("address1")[0].innerHTML.trim();
+          }
+  	      var billToSuite = '';
+          if (billAddressVars.getElementsByClassName("suite").length > 0) {
+            billToSuite = billAddressVars.getElementsByClassName("suite")[0].innerHTML.trim();
+          }
+
+      	  if (shipToAddress1 == billToAddress1 && shipToSuite == billToSuite){
+      	    shipBillSameAddress = "True"
+      	  }
+      	  else {
+      	  	shipBillSameAddress = "False"
+      	  }
+
+		      var VATmultiplier = (1+(.01 * countryTaxRate))
+		      var realCalcSubtotal = (pageData.order.total - pageData.order.tax)
+          //var realCalcTax =      (pageData.order.grossTotal - realCalcSubtotal) //mod
+            
+          //pageData.order.tax = Number(realCalcTax.toFixed(2)); //mod
+          pageData.order.subTotal = Number(realCalcSubtotal.toFixed(2)); //mod
+		    }
+		    else{
+    	      dirTier1 = "Checkout"
+    	      dirTier2 = "Address & Shipping"
+    	      productPageType = "checkout"
+    	      adobePageEvents = "scCheckout,event8,event9"
+    	      adobePageName = dwSiteID + " : " + dirTier1 + " : " + dirTier2
+		    }
+		}
+		else if (dirTier1 == "Sites-NA-Site" ) { //mod - revert to tier1 for launch
+		    if (pagePath.indexOf("Checkout-Login") >= 0) {
+    	  	  dirTier1 = "Checkout"
+    	  	  dirTier2 = "Login"
+    	  	  productPageType = "other"
+    	  	  adobePageEvents = "event8"
+    	  	  adobePageName = dwSiteID + " : " + dirTier1 + " : " + dirTier2
+    	  	}
+		} //mod
+		else if (dirTier1 == "404" ) {
+          dirTier1 = "404 Error Page"
+          adobePageType = "errorPage"
+          productPageType = "other"
+          adobePageName = dwSiteID + " : " + dirTier1
+        }
+    	else   {
+		  productPageType = "other"
+		  adobePageName = dwSiteID + pagePath
+		}
+      }
+
+}
+
+//Start Slice v7 -- pageData.items and pageData.order functions
+
+
+
+
+// Two functions used to build the s.products string for Adobe
+function adobeCheckoutInfo(adobeProdPageType) {
+
+    if (adobeProdPageType == "cart" ||
+    	adobeProdPageType == "checkout" ) {
+
+  		tempVar = ""
+  		adobeCartItems(tempVar);
+	}
+	else if (adobeProdPageType == "orderConfirm") {
+	// ;event21=tax|event22=shipping|event23=duties|event25=orderDiscount
+	      if (pageData.order.promoCode !== undefined) { 
+  	        tempVar = ";event21=" + pageData.order.tax + "|event22=" + pageData.order.shipping + "|event25=" + pageData.items[0].discount;
+  	      } else {
+  	        tempVar = ";event21=" + pageData.order.tax + "|event22=" + pageData.order.shipping  
+  	      }
+    	
+		adobeCartItems(tempVar);
+    }
+    else {
+        stuffInItems = ""  //Send a blank to the home page, 404, internal search, categories
+    }
+}
+
+
+function adobeCartItems(adobeProdEvars) {
+// product string for the cart page, relies on items array
+	 adobeEvarString = adobeProdEvars
+	 adobeItemsString = [];
+	BrightTag.each(pageData.items, function(item, i) {
+		var prodID = item.productID; var quantity = item.quantity; var price = (item.price * item.quantity);
+		//VAT reduction
+		var VATmultiplier = (1+(.01 * countryTaxRate))
+		var netPrice = (price / VATmultiplier);
+	 	adobeItemsString.push(";" + prodID + ";" + quantity + ";" + netPrice.toFixed(2));
+	  });
+	  stuffInItems = adobeItemsString.join(',') + adobeProdEvars
+	  console.log('items calc');
+
+}
+
+if (typeof productPageType !== "undefined" && productPageType !== "productDetail") {
+	adobeCheckoutInfo(productPageType);
+}
+
+
+
+
+
+
+
+//End Slice v7 -- pageData.items and pageData.order functions
+
+//responsive site design
+var w = window,d = document,e = d.documentElement, g = d.getElementsByTagName('body')[0], x = w.innerWidth || e.clientWidth || g.clientWidth, y = w.innerHeight|| e.clientHeight|| g.clientHeight;var viewportName = 'Mobile';if(x > 959) {viewportName = 'Desktop';}else if (x > 544) {viewportName = 'Tablet'; }
+
+
+
+
+// marketing campaign strings
+var campParameter = (location.search.split('mktID=')[1]||location.search.split('mktid=')[1]||location.search.split('mktId=')[1]||'').split('&')[0];
+
+if (campParameter !== null) {
+  	var adobeCampaignID = campParameter
+  	var campArray = adobeCampaignID.split( ':' );
+
+		var aMktchannel = campArray[0];
+		var aPartner = campArray[1];
+		var aPlatform = campArray[2];
+		var aPdcampaign = campArray[3];
+		var aOriginCtry = campArray[4];
+
+}
+else {
+	//adobeCampaignID = ''
+};
+
+
+
+
+// Determine add to cart events - called from Signal events
+function getAddEvents(){
+var cartTxt = document.getElementsByClassName('minicart-quantity')[0].innerHTML.toString().trim();
+		var cartIsEmpty = parseInt(cartTxt);
+
+		if (cartIsEmpty == "0") {
+			// New Cart
+			cartEvents = "scAdd,scOpen";
+    	}
+		else {
+			// Cart exists
+			cartEvents = "scAdd";
+		}
+return cartEvents;
+
+};
+// Determine first product in cart creation - called from Signal events
+function getAddFirstProd(){
+var cartTxt = document.getElementsByClassName('minicart-quantity')[0].innerHTML.toString().trim();
+		var cartIsEmpty = parseInt(cartTxt);
+
+		if (cartIsEmpty == "0") {
+			// New Cart
+			openCartProd = styleNumber;
+    	}
+		else {
+			// Cart exists
+			openCartProd = "";
+		}
+return openCartProd;
+}
+// Determine add to cart product string - called from Signal events
+function addToCartItems(){
+var e = document.getElementsByClassName("quantity-select")[0];
+var selectedQtyDropdown = e.options[e.selectedIndex].value;
+var prodPrice = pageData.items[0].price
+//VAT reduction
+var VATmultiplier = (1-(.01 * countryTaxRate));
+var netPrice = (prodPrice * VATmultiplier);
+var totalPrice = selectedQtyDropdown * netPrice.toFixed(2);
+
+if (styleNumber !== "undefined"){
+		//not empty
+	}
+	else {
+		//empty, use stuffInItems from modal
+		styleNumber = stuffInItems
+	} //may be problem here
+
+var prodString = ';'+styleNumber+';'+selectedQtyDropdown+';'+totalPrice;
+return prodString;}
+
+
+
+
+    //------ DV Custom Functions Below -------
+	function updateDataLayerItems (items) {
+
+	  if (typeof window.pageData.items === Array) {
+	    window.pageData.items = jQuery.extend(window.pageData.items, items);
+	  }
+	  else {
+	    window.pageData.items = items;
+	  }
+	}
+
+	function updateDataLayerEvents (events) {
+
+	  if (typeof window.pageData.events === Array) {
+	    window.pageData.events = jQuery.extend(window.pageData.events, events);
+	  }
+	  else {
+	    window.pageData.events = events;
+	  }
+	}
+
+	// Catch newsletter signup field when it is valid
+	//function logNewsletterAttempt () {
+
+	//  s.linkTrackVars="events";
+	//  s.linkTrackEvents="event4";
+	//  s.events="event4";
+	//  s.tl(this,'o','Newsletter Signup');
+	//  ga('send', 'event', 'Email Signup', 'Footer'); //mod
+	//}
+
+	// Newsletter valid input
+	//$('#emailsignup-form').on('submit', function() {
+
+	//  if ($('#emailsignup-form input[name="email"]').hasClass('hf-valid')) {
+
+	//    var pageEvent = {newsletter: {valid:true}};
+	//    updateDataLayerEvents(pageEvent);
+	// }
+
+	//  if (typeof pageData.events !== 'undefined' && typeof pageData.events.newsletter !== 'undefined') {
+	//    if (pageData.events.newsletter.valid === true) {
+	//      logNewsletterAttempt();
+	//    }
+	//  }
+	//});
+  
+
+	function getCurrency () {
+
+    //var price = jQuery('.pricing, .price').text();
+    var priceElements = document.getElementsByClassName('price');
+    var price = '';
+
+    if (priceElements.length > 0) {
+      price = priceElements[0].innerText;
+    }
+    else {
+      priceElements = document.getElementsByClassName('pricing');
+
+      if (priceElements.length > 0) {
+        price = priceElements[0].innerText;
+      }
+    }
+
+	  var currency = 'USD';
+
+	  if (price.indexOf('£') !== -1) {
+      // Great Britain
+	    currency = 'GBP';
+	  }
+	  else if (price.indexOf('CHF') !== -1) {
+      // Swiss
+	    currency = 'CHF';
+	  }
+	  else if (price.indexOf('$') !== -1) {
+      // USA
+	    currency = 'USD';
+	  }
+    else if (price.indexOf('Kč') !== -1) {
+      // Czech
+	    currency = 'CZK';
+	  }
+    else if (price.indexOf('zł') !== -1) {
+      // Poland
+	    currency = 'PLN';
+	  }
+    else if (price.toLowerCase().indexOf('kr') !== -1) {
+
+      var pageURL = window.location.href;
+
+      if (pageURL.indexOf('/se/') > 0) {
+        // Sweden
+        currency = 'SKE';
+      }
+      else {
+        // Denmark
+        currency = 'DKK';
+      }
+	  }
+    else if (price.indexOf('Ft') !== -1) {
+      // Hungary
+	    currency = 'HUF';
+	  }
+
+	  return currency;
+	}
+
+	// Initialize: Run at page load
+	(function(){
+
+	  pageData.navigation.customer.currency = getCurrency();
+
+	})();
+
+
+ // Custom Events
+//jQuery(window).on('AddToCartQuickView', function(e){
+	//console.log('Added to cart event heard', e.detail);
+//});
+
+//jQuery(window).on('ProductQuickView', function(e){
+	//console.log('Quick Product View event heard', e.detail);
+//});
+
+//jQuery(window).on('NewsletterSignupModal', function(e){
+//	console.log('Event: NewsletterSignupModal');
+//});
+
+
+
+// Modal Events
+jQuery(window).on('shown.bs.modal', function (event) {
+
+  if (jQuery('#addToBagOverlay').hasClass('show')) {
+
+    //console.log('Added to cart',' noVariables ');
+
+    jQuery('body').trigger('AddToCartQuickView', '');
+  }
+  else if (jQuery('#quickViewModal').hasClass('show')) {
+		adobeButtonCTA = getButtonCallToAction();
+		adobePageEvents = 'prodView,event1'
+		itemsVarString = getStyleIDFromImageURL(jQuery('.product-quickview__product-image img').attr('src'));
+		styleNumber = itemsVarString;
+		stuffInItems = ";" + itemsVarString;
+    console.log('Product Quick View', 'styleID &'+ adobePageEvents);
+
+    jQuery('body').trigger('ProductViewQuickView');
+  }
+  else if (jQuery('#emailSignupModal').hasClass('show')) {
+
+	//ga('send', 'event', 'Email Signup', 'Footer'); //mod
+    console.log('Newsletter Signup',' noVariables ');
+    jQuery('body').trigger('NewsletterSignupModal');
+    
+  }
+});
+
+
+
+//Function for quickview - get style
+function getStyleIDFromImageURL (swatchURL) {
+  var swatchParts = swatchURL.split('/');
+  var productStyleIDColorID = '';
+  if (swatchParts.length > 5) {
+    // 111111_01
+    productStyleIDColorID = swatchParts[4] + '_' + swatchParts[5];
+  }
+  return productStyleIDColorID;
+}
+
+// If Payment Address is surfaced
+jQuery('body').on('change', '#shippingAddressUseAsBillingAddress', function(e) {
+  if(this.checked === false) {
+    console.log('showBillingAddress');
+    jQuery(window).trigger('showBillingAddress');
+  }
+  else {
+    console.log('hideBillingAddress');
+    jQuery(window).trigger('hideBillingAddress');
+  }
+});
+
+// Watch for changes in one page checkout
+if (jQuery('#checkout-main').length) {
+
+	var checkoutStage = document.getElementById('checkout-main');
+
+	var checkoutObserver = new MutationObserver(function(mutations) {
+
+		var stageValue = jQuery('#checkout-main').attr('data-checkout-stage');
+	  console.log('Stage', stageValue);
+
+		if (stageValue === 'payment') {
+		// View Payment Types
+		// Run cart scrape
+    		adobeCheckoutInfo(productPageType);
+    		adobePageEvents = 'event10';
+    		console.log('submitShippingType');
+    		jQuery(window).trigger('submitShippingType');
+    		var pageURL = window.location.href;
+              if (pageURL.indexOf('ca.puma.com') > 0 || pageURL.indexOf('_CA') > 0 || pageURL.indexOf('/ca/') > 0 ) {
+                s.pageName = "CA Shop : Checkout : Payment"; //mod;
+              } else if (pageURL.indexOf('us.puma.com') > 0 || pageURL.indexOf('_US') > 0 || pageURL.indexOf('/us/') > 0 ) {
+    		    s.pageName = "US Shop : Checkout : Payment"; //mod
+              }
+		}
+		else if (stageValue === 'placeOrder') {
+		// View Review Order total
+		// Run cart scrape
+    		adobeCheckoutInfo(productPageType);
+    		adobePageEvents = 'event11';
+    		console.log('submitPaymentType');
+    		jQuery(window).trigger('submitPaymentType');
+    		var pageURL = window.location.href;
+              if (pageURL.indexOf('ca.puma.com') > 0 || pageURL.indexOf('_CA') > 0 || pageURL.indexOf('/ca/') > 0 ) {
+                s.pageName = "CA Shop : Checkout : Review Order"; //mod;
+              } else if (pageURL.indexOf('us.puma.com') > 0 || pageURL.indexOf('_US') > 0 || pageURL.indexOf('/us/') > 0 ) {
+    		    s.pageName = "US Shop : Checkout : Review Order"; //mod
+              }
+		}
+
+	});
+	checkoutObserver.observe(checkoutStage, {
+	  attributes: true,
+	  attributeFilter: ['data-checkout-stage'] });
+
+	checkoutStage.dataset.selectContentVal = 1;
+}
+
+// Watch for color changes
+jQuery('body').on('click', '.swatch__container:not(.selected)', function() {
+
+	console.log('Event: changeColor');
+	jQuery(window).trigger('changeColor');
+});
+
+jQuery(document).ready(function () {
+	// Watch for changes in one page checkout
+	if (jQuery('.mini-cart-overlay').length) {
+
+		var miniCart = document.querySelector('.mini-cart-overlay');
+
+		var miniCartObserver = new MutationObserver(function(mutations) {
+
+			var miniCartVisible = jQuery('.mini-cart-overlay').hasClass('show');
+
+			if (miniCartVisible === true) {
+				console.log('Event: showMiniCart');
+			  jQuery(window).trigger('showMiniCart');
+			}
+			else {
+			  console.log('Event: closeMiniCart');
+			  jQuery(window).trigger('closeMiniCart');
+			}
+
+		});
+		miniCartObserver.observe(miniCart, {
+		 attributes: true,
+		 attributeFilter: ['class']
+		});
+	}
+});
+
+
+// Cookies
+(function(factory){var registeredInModuleLoader=!1;if(typeof define==='function'&&define.amd){define(factory);registeredInModuleLoader=!0}
+if(typeof exports==='object'){module.exports=factory();registeredInModuleLoader=!0}
+if(!registeredInModuleLoader){var OldCookies=window.Cookies;var api=window.Cookies=factory();api.noConflict=function(){window.Cookies=OldCookies;return api}}}(function(){function extend(){var i=0;var result={};for(;i<arguments.length;i++){var attributes=arguments[i];for(var key in attributes){result[key]=attributes[key]}}
+return result}
+function init(converter){function api(key,value,attributes){var result;if(typeof document==='undefined'){return}
+if(arguments.length>1){attributes=extend({path:'/'},api.defaults,attributes);if(typeof attributes.expires==='number'){var expires=new Date();expires.setMilliseconds(expires.getMilliseconds()+attributes.expires*864e+5);attributes.expires=expires}
+attributes.expires=attributes.expires?attributes.expires.toUTCString():'';try{result=JSON.stringify(value);if(/^[\{\[]/.test(result)){value=result}}catch(e){}
+if(!converter.write){value=encodeURIComponent(String(value)).replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,decodeURIComponent)}else{value=converter.write(value,key)}
+key=encodeURIComponent(String(key));key=key.replace(/%(23|24|26|2B|5E|60|7C)/g,decodeURIComponent);key=key.replace(/[\(\)]/g,escape);var stringifiedAttributes='';for(var attributeName in attributes){if(!attributes[attributeName]){continue}
+stringifiedAttributes+='; '+attributeName;if(attributes[attributeName]===!0){continue}
+stringifiedAttributes+='='+attributes[attributeName]}
+return(document.cookie=key+'='+value+stringifiedAttributes)}
+if(!key){result={}}
+var cookies=document.cookie?document.cookie.split('; '):[];var rdecode=/(%[0-9A-Z]{2})+/g;var i=0;for(;i<cookies.length;i++){var parts=cookies[i].split('=');var cookie=parts.slice(1).join('=');if(cookie.charAt(0)==='"'){cookie=cookie.slice(1,-1)}
+try{var name=parts[0].replace(rdecode,decodeURIComponent);cookie=converter.read?converter.read(cookie,name):converter(cookie,name)||cookie.replace(rdecode,decodeURIComponent);if(this.json){try{cookie=JSON.parse(cookie)}catch(e){}}
+if(key===name){result=cookie;break}
+if(!key){result[name]=cookie}}catch(e){}}
+return result}
+api.set=api;api.get=function(key){return api.call(api,key)};api.getJSON=function(){return api.apply({json:!0},[].slice.call(arguments))};api.defaults={};api.remove=function(key,attributes){api(key,'',extend(attributes,{expires:-1}))};api.withConverter=init;return api}
+return init(function(){})}));

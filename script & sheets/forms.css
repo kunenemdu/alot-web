@@ -1,0 +1,35 @@
+.form
+{
+    background-color: rgb(50, 50, 145);
+    height: 20vw;
+    width: 25vw;
+    position: relative;
+    left: 40vw;
+    top: 15vw;
+}
+
+form
+{
+    padding: 5vw;
+}
+
+form p
+{
+    display: inline-flex;
+    margin-right: 25px;
+}
+
+form .email
+{
+    margin-right: 55px;
+}
+
+form input
+{
+    display: inline-flex;
+}
+
+body
+{
+    background-color: black;
+}

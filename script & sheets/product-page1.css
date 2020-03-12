@@ -1,0 +1,445 @@
+button, img, input, label{
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+
+*{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: rgb(5, 15, 44);
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: white; 
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: white; 
+}
+
+.breadcrumb {
+  padding: 0vw 0vw 0.4vw 1vw;
+  list-style: none;
+  background-color: whitesmoke;
+}
+.breadcrumb li {
+  display: inline;
+  font-size: 0.8vw;
+  color: black;
+}
+.breadcrumb li+li:before {
+  color: black;
+  content: "/\00a0";
+  padding: 0.5vw;
+}
+.breadcrumb li a {
+  color: black;
+  text-decoration: none;
+}
+.breadcrumb li a:hover {
+  color: grey;
+}
+
+.grid-container{
+    margin-top: 5vw;
+    display: grid;
+    grid-template-areas: auto auto;
+    width: 78.9%;
+    left: 10vw;
+    position: relative;
+    grid-gap: 0.7vw;
+}
+
+.image{
+    width: 26vw;
+    height: 26vw;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.images{
+    display: grid;
+    grid-template-columns: auto auto;
+    width: fit-content;
+    grid-gap: 0.3vw;
+    overflow: hidden;
+}
+
+.image img{
+    width: 26vw;
+    height: 26vw;
+}
+
+.image img:hover{
+    cursor: pointer;
+}
+
+/* img:hover{
+    -moz-transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+    cursor: pointer;
+
+    -webkit-transition: transform 1.05s ease-in-out;
+    -moz-transition:transform 1.05s ease-in-out;
+    -ms-transition:transform 1.05s ease-in-out;
+} */
+
+.details{
+    grid-column-end: 4;
+    
+}
+
+.details{
+    display: grid;
+    grid-template-rows: 7.5vw 2.4vw 7vw 1vw;
+    grid-gap: 1.4vw;
+}
+
+
+.item-info{
+    display: grid;
+    grid-template-areas: 
+    'category category'
+    'title price';
+    width: 25vw;
+}
+
+.item-info .category{
+    font-size: 1vw;
+    line-height: 0;
+    margin-top: -7px;
+    padding: 15px 0;
+    grid-area: category;
+    font-weight: 350;
+}
+
+.title{
+    font: inherit;
+}
+
+.item-info .title{
+    font-size: 1.6vw;
+    font-weight: 370;
+    margin-top: -20px;
+    color: black;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-area: title;
+    padding: 3px 0;
+    width: 80%;
+}
+
+.item-info .price{
+    grid-area: price;
+    text-align: right;
+    font-size: 1.6vw;
+    font-weight: 100;
+    margin-top: -20px;
+    color: black;
+    padding: 4px 0;
+    width: fit-content;
+    margin-left: 90%;
+}
+
+.choose{
+    font: inherit;
+    width: fit-content;
+}
+
+.sizes{
+    font: inherit;
+    font-size: 1.3vw;
+    font-weight: 100;
+}
+
+#sizes
+{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* display 6 items in 1 line */
+    width: fit-content;
+    gap: 7px;
+    height: fit-content;
+    padding: 0;
+    margin-left: .3vw;
+}
+
+#sizes input
+{
+    visibility: hidden;
+    position: absolute;
+}
+
+#sizes label
+{
+    font-size: 1.2vw;
+    position: relative;
+    justify-content: center;
+    cursor: pointer;
+    height: 3vw;
+    width: 3.5vw;
+    box-shadow: 0px 0px 0.9px 0px black;
+    box-sizing: border-box;
+}
+
+#sizes > :not(input):not(label) > label
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#sizes input:checked + label
+{
+    border: 1px solid black;
+    color: white;
+    background-color: black;
+}
+
+#sizes input:hover + label
+{
+    border: 1px solid black;
+}
+
+.cartx1{
+    width: 100%;
+    margin-top: 1.2vw;
+    padding: 0;
+}
+
+.cartx1 ul li{
+    list-style-type: none;
+    display: block;
+}
+
+.cartx1 button{
+    padding: 1.4vw;
+    border: 1px solid black;
+    cursor: pointer;
+    text-align: center;
+    outline: none;
+    width: 46%;
+    position: relative;
+    right: 32px;
+}
+
+.cartx1 .wishlist:hover{
+    color: white;
+    background-color: black;
+    transition: 300ms ease;
+}
+
+.add{
+    border-radius: 90px;
+    background-color: rgb(5, 15, 44);
+    color: white;
+}
+
+.cartx1 .add:hover{
+    background-color: white;
+    color: black;
+}
+
+.cartx1 .wishlist{
+    border: 1px solid black;
+    color: black;
+    background-color: white;
+    border-radius: 90px;
+}
+
+.btn.active {
+  background-color: black;
+  color: white;
+}
+
+.return{
+    text-align: left;
+}
+
+.return p{
+    font-size: 0.9vw;
+}
+
+.return p:hover{
+    color: rgb(155, 155, 155);
+    cursor: pointer;
+}
+
+.return i{
+    font-size: 1.3vw;
+    color: rgb(123, 123, 247);
+}
+
+/* Popup container */
+.return {
+  position: relative;
+  width: 100%;
+}
+
+/* The actual popup (appears on top) */
+.return .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+}
+
+/* Popup arrow */
+.return .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.return .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+}
+
+.description{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    padding: 0 2vw;
+    font-weight: 250;
+    font-size: 1.4vw;
+}
+
+.product-card {
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.25);
+    display: inline-block;
+    margin: 8px;
+    height: 30vw;
+}
+
+.product-card:hover{
+    box-shadow: 0px 0px 0.5px 0px black;
+}
+
+.product-info .colour{
+    display: none;
+}
+
+.product-info{
+    display: grid;
+  grid-template-areas:
+    'header price'
+    'main main';
+  width: 100%;
+  margin-top: 0.3vw;
+}
+
+.product-info h5{
+    grid-area: header;
+    font-weight: 350;
+    margin: 0;
+    width: 20vw;
+    color: black;
+    font-size: 1.2vw;
+}
+
+.product-info .price{
+    grid-area: price;
+    text-align: right;
+    font-weight: 450;
+    margin: 0;
+    color: black;
+    font-size: 1.1vw;
+}
+
+.product-info .category{
+    grid-area: main;
+    color: rgb(46, 46, 46);
+    font-size: 0.7vw;
+    line-height: 0;
+    margin: 0;
+    padding: 15px 0;
+}
+
+
+.product-card img {
+    width: 24vw;
+    height: 24vw;
+}
+
+.product-image{
+    opacity: 1;
+    position: relative;
+}
+
+
+body a{
+    text-decoration: none;
+}
+
+.scrolling-wrapper {
+    overflow-x: scroll;
+    white-space: nowrap;
+    height: 35vw;
+    padding: 0 2vw;
+    margin-bottom: 2vw;
+    overflow-y: hidden;
+}
+
+.scrolling-wrapper{
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+/* Track */
+.scrolling-wrapper::-webkit-scrollbar-track {
+  background-color: whitesmoke;
+  scrollbar-width: thin;
+}
+ 
+/* Handle */
+.scrolling-wrapper::-webkit-scrollbar-thumb {
+  background: black; 
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+.scrolling-wrapper::-webkit-scrollbar-thumb:hover {
+  background: grey;
+  cursor: pointer;
+}
+
+.scrolling-wrapper::-webkit-scrollbar {
+  height: 5px;;
+}
+
+.recent{
+    font-size: 1.5vw;
+    margin: 0;
+    font-weight: 400;
+    padding: 1vw 0;
+}

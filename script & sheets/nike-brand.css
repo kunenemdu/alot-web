@@ -1,0 +1,302 @@
+*{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: rgb(5, 15, 44);
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: grey; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: white; 
+}
+
+
+.breadcrumb {
+  padding: 0vw 0vw 0.4vw 1vw;
+  list-style: none;
+  background-color: whitesmoke;
+}
+.breadcrumb li {
+  display: inline;
+  font-size: 0.8vw;
+  color: black;
+}
+.breadcrumb li+li:before {
+  color: black;
+  content: "/\00a0";
+  padding: 0.5vw;
+}
+.breadcrumb li a {
+  color: black;
+  text-decoration: none;
+}
+.breadcrumb li a:hover {
+  color: grey;
+}
+
+
+
+body {
+    margin: 0 ;
+    overflow-x: hidden;
+	width: 100%;
+	font-family: 'Roboto', sans-serif;
+	background-color: whitesmoke;
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'para para para para para para'
+    'header header header header header header'
+    'menu main main main main main'
+    'menu footer footer footer footer footer';
+  width: 100%;
+  background-color: white;
+}
+
+.logo-left{ grid-area: logo; position: absolute}
+.item{ grid-area: para; background-color: black; color: white; margin-bottom: 2.3vw;}
+.item1 { grid-area: header;  }
+.item2 { grid-area: menu; }
+.item3 { grid-area: main; width: 80vw;  }
+.item5 { grid-area: footer; }
+
+/* .grid-container > div{
+    background-color: white;
+} */
+
+
+
+select{
+    padding: 0.8vw;
+    /* -webkit-appearance: none; */
+    font-size: 1vw;
+    font-weight: 300;
+}
+
+select option{
+    font:inherit;
+}
+
+.sort {
+    float: right;
+    margin-bottom: 30px;
+}
+
+.collection-sort {
+    margin-right: 3.6vw;
+    padding: 0;
+}
+
+label {
+	font-size: 1vw;
+    line-height: 2em;
+}
+
+.products {
+    overflow: hidden;
+}
+
+.grid-container a{
+    margin-bottom: 3vw;
+}
+
+.product-card {
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.25);
+    float: left;
+    margin: 8px;
+    height: 31vw;
+}
+
+.product-card:hover{
+    box-shadow: 0px 0px 0.5px 0px black;
+}
+
+.product-info .colour{
+    display: none;
+}
+
+.product-info{
+    display: grid;
+  grid-template-areas:
+    'header price'
+    'main main';
+  width: 24.5vw;
+  margin-top: 0.3vw;
+}
+
+.product-info h5, .item2 h5{
+    grid-area: header;
+    font-size: 1.2vw;
+    font-weight: 350;
+    margin: 0;
+    width: 15vw;
+    color: black;
+}
+
+.product-info .price{
+    grid-area: price;
+    text-align: right;
+    font-size: 1.2vw;
+    font-weight: 500;
+    margin: 0;
+    color: black;
+}
+
+.product-info .category{
+    grid-area: main;
+    color: rgb(155, 155, 155);
+    font-size: 1vw;
+    line-height: 0;
+    margin: 0;
+    padding: 15px 0;
+}
+
+
+.product-card img {
+    width: 24.5vw;
+    height: 24.5vw;
+}
+
+.product-image{
+    opacity: 1;
+    position: relative;
+}
+
+
+body a{
+    text-decoration: none;
+}
+
+.item2{
+    padding: 0;
+    padding: 0 2vw;
+}
+
+.item h2 {
+	font-size: 3.5vw;
+    font-weight: 480;
+    padding: 0 3vw;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin-top: 100px;
+}
+.item p{
+    font: inherit;
+    font-size: 1vw;
+    padding: 0 3vw;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    margin-bottom: 50px;
+    letter-spacing: 1px;
+}
+
+.logo-left img{
+    width: 11vw;
+    height: 7vw;
+    background-color: black;
+    position: absolute;
+    top: 6vw;
+    left: 3vw;
+}
+
+.item2 button{
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 5px;
+    padding: 0.3vw 1vw;
+    font-size: 0.9vw;
+    font-family: inherit;
+    border: none;
+    outline: none;
+}
+
+.item2 input::placeholder{
+    font-size: 11px;
+    color: rgb(120, 118, 146);
+    background-color: ghostwhite;
+    border:0.5px solid ghostwhite;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    padding-left: 10px;
+    width: 230px;
+    height: 35px;
+    outline-color: transparent;
+    color: rgb(23, 22, 85);
+    position: relative;
+    color:transparent;
+}
+
+.item2{
+    width: 16vw;
+    margin-bottom: 3vw;
+    position: relative;
+}
+
+.item2 h5{
+    box-shadow: 0px 0px 1px 0px;
+    margin-bottom: 1vw;
+    padding: 0.6vw 0.5vw;
+    margin-top: 20px;
+}
+
+.item2 button:hover{
+    color: rgb(182, 178, 178);
+}
+
+.colour button{
+    border-radius: 20px;
+    padding: 1vw;
+    display: inline;
+    border: 0.6px solid rgb(199, 198, 198);
+}
+
+.colour{
+    width: 50%;
+}
+
+
+.item5 button{
+    width: 97%;
+    padding: 1vw 0;
+    background-color: white;
+    border: 1px solid rgb(212, 212, 212);
+    font-size: 0.8vw;
+    cursor: pointer;
+    outline: none;
+    margin-top: 3vw;
+    position: relative;
+}
+
+.reset button{
+    padding: 0.1vw 2vw;
+    width: 100%;
+    font-size: 2vw;
+    border: 1px solid black;
+    margin-top: 1.5vw;
+    border-radius: 2.5px;
+}
+
+.reset button:hover{
+    color: white;
+    background-color: black;
+}

@@ -1,0 +1,383 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+
+/* NEW START CLEAN CODE */
+/*header for man*/
+.header{
+    top: 0;
+    background-color: rgb(5, 15, 44);
+    position:fixed;
+    width: 100%;
+    color: whitesmoke;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 80px;
+    grid-template-areas: "headtop"
+    "headbottom";  
+    font-family:calibri;
+    height: 131px;
+}
+
+.headtop{
+    grid-area: headtop;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: "small login";
+}
+.small{
+    grid-area: small;
+    margin-left: 500px;
+    padding: 15px;
+}
+.login{
+    grid-template-areas: "mann word";
+    grid-template-columns:2fr 1fr;
+    display: grid;
+    grid-area: login;
+    padding: 15px;
+}
+.login :hover{
+     color: rgb(177, 167, 167);
+     
+}
+.mann{
+    grid-area: mann;
+}
+.mann i{
+    margin-left: 300px;
+    font-size: 9px;
+}
+.word{
+    margin-left: 13px;
+    padding-top: 5px;
+    font-size: 14px;
+    grid-area: word;
+}
+
+.headbottom{
+    border-top: 0.5px solid grey;
+    grid-area: headbottom;
+    display: grid;
+    grid-template-areas:"logo navbar search";
+    grid-template-columns: 1fr 2fr 1fr;
+}
+.logo{
+    grid-area: logo;
+    padding: 25px 0px 20px 50px;
+}
+.navbar{
+    grid-area: navbar;
+    padding-top: 10px;
+}
+.navbar ul li{
+    list-style: none;
+    float: left;
+    padding:20px;
+    font-weight: bold;
+    font-size:16px;
+}
+.navbar ul li:hover{
+    color: rgb(189, 183, 183);
+    border-bottom: 2px solid rgb(184, 178, 178);
+}
+ 
+.search{
+    grid-area: search;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: "place icons";
+}
+.place{
+    padding-top: 20px;
+    grid-area: place;
+}
+input{
+    background-color: ghostwhite;
+    border:0.5px solid ghostwhite;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    padding-left: 20px;
+    width: 146px;
+    height: 39px;
+    outline-color: transparent;
+}
+input::placeholder{
+    font-size: 11px;
+    color: rgb(166, 165, 175);
+}
+.search button{
+    position: absolute;
+    background-color: ghostwhite;
+    border:0.5px solid ghostwhite;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    width: 35px;
+    height: 40px;
+    outline-color: transparent;
+    color:rgb(99, 96, 96);
+}
+
+input:focus::placeholder{
+    color:transparent;
+    
+}
+.icons{
+    grid-area: icons;
+    padding-top: 30px;
+}
+.icons i{
+    padding-left: 14px;
+    font-size: 14px;
+}
+
+
+/* THE FOOTER FOR MAN */
+.footer{
+    margin-top: 1px;
+    color: white;
+    grid-area: footer;
+    display: grid;
+    grid-template-rows: 1fr 3.5fr 1fr;
+    background-color: rgb(5, 15, 44);
+    grid-template-areas: "foot-upper foot-upper"
+    "foot-middle foot-middle"
+    "foot-lower foot-lower";
+}
+
+/*this is the footer upper*/
+.foot-upper{
+    grid-area: foot-upper;
+    display: grid;
+    grid-template-areas: "language email";
+    grid-template-columns:  1fr 1fr ;
+}
+.email{
+    grid-area: email;
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-left: 300px;
+}
+.email input{
+    border: 0.5px solid rgb(109, 106, 106);
+    background-color: rgb(4, 4, 39);
+    height: 50px;
+    width: 260px;
+
+    color: rgb(241, 239, 235);
+    border-radius: 0px;
+}
+.email input:hover{
+    border:1px solid rgb(54, 52, 52);
+}
+input:focus::placeholder{
+    color:white;
+}
+.language{
+    text-align: center;
+    grid-area: language;
+    padding-top: 25px;
+    font-size: 40px;
+}
+
+/*this is the footer middle*/
+.foot-middle{
+    grid-area: foot-middle;
+    display: grid;
+    grid-template-areas: "box1 box2 box3 box4";
+    grid-template-columns: 25% 25% 25% 25%;
+    font-weight: bold;
+
+}
+.box1{
+    padding: 20px;
+  grid-area: box1;
+  border-bottom:0.2px solid rgb(59, 59, 59) ;
+  border-top:0.2px solid rgb(92, 90, 90);
+}
+.box2{
+    padding: 20px;
+    grid-area: box2;
+    border-bottom:0.2px solid rgb(59, 59, 59) ;
+    border-top:0.2px solid rgb(92, 90, 90);
+  }
+  .box3{
+    padding: 20px;
+    grid-area: box3;
+    border-bottom:0.2px solid rgb(59, 59, 59) ;
+    border-top:0.2px solid rgb(92, 90, 90);
+  }
+  .box3 h5{
+      padding-right: 25px;
+  }
+  .box4{
+    border-top:0.2px solid rgb(92, 90, 90);
+    padding: 20px;
+    border-bottom:0.2px solid rgb(59, 59, 59) ;
+    grid-area: box4;
+
+  }
+.foot-middle ul li{
+    list-style: none;
+    padding-top: 10px;
+    display: block;
+    color: rgb(97, 95, 95);
+    text-align: left;
+    font-style: calibri;
+    font-size: 11px;
+}
+.foot-middle h5{
+margin-right: 120px;
+font-weight: bold;
+color: rgb(206, 201, 201);
+}
+.foot-middle i{
+    padding-top: 30px;
+    padding: 17px;
+    float: left;
+    font-size: 16px;
+    border-bottom: 1px solid rgb(28, 23, 41);
+
+}
+.box4 h5{
+    padding-left: 15px;
+}
+
+/*this the foot lower*/
+.foot-lower{
+    grid-area: foot-lower;
+    display: grid;
+    grid-template-areas: "pay copy rate";
+    grid-template-columns:  1fr 1fr 1fr;
+    padding-top: 20px;
+}
+
+.copy{
+    grid-area: copy;
+    padding-top: 10px;
+}
+.pay{
+    padding-left: 20px;
+    grid-area: pay;
+    justify-self: left;
+
+}
+.rate{
+    justify-self: right;
+    padding-right: 40px;
+}
+.pay i{
+    font-size: 18px;
+    
+}
+
+.grid-container {
+  display: grid;
+  grid-template-areas: "container1 container2 container3";
+  background-color: red;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+
+.container1 {
+    text-align: center;
+    grid-area: container1;
+  }
+.container2 {
+    text-align: center;
+    grid-area: container2;
+  }
+.container3 {
+    text-align: center;
+    grid-area: container3;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.5s ease;
+  }
+  
+  .container1,.container2,.container3:hover .overlay {
+    display: block;
+    background: rgba(0, 0, 0, .3);
+  }
+  
+  img {
+    width: 450px;
+    height: 300px;
+    left: 0;
+  }
+
+.name{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    font-size: 30px;
+    text-align: center;
+    padding: 0;
+    background-color: rgb(5, 15, 44);
+    color: white;
+    width: 100%;
+    padding: 1px 0px 1px 0px;
+    margin-top: -5px;
+}
+  
+  
+  .button {
+    position: absolute;
+    width: 100%;
+    left:0;
+    top: 50%;
+    text-align: center;
+    opacity: 0;
+    transition: opacity .35s ease;
+  }
+  
+  .button a {
+    width: 200px;
+    padding: 15px 40px;
+    text-align: center;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: rgb(5, 15, 44);
+    z-index: 1;
+    text-decoration: none;
+  }
+  
+  .container:hover .button {
+      display: block;
+    opacity: 1;
+  }
+
+
+ul.breadcrumb {
+  padding: 10px 16px;
+  list-style: none;
+  background-color: #eee;
+}
+ul.breadcrumb li {
+  display: inline;
+  font-size: 18px;
+}
+ul.breadcrumb li+li:before {
+  padding: 8px;
+  color: black;
+  content: ">\00a0";
+}
+ul.breadcrumb li a {
+  color: blue;
+  text-decoration: none;
+}
+ul.breadcrumb li a:hover {
+  color: blue;
+  text-decoration: underline;
+}
+

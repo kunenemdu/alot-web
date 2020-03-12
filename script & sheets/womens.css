@@ -1,0 +1,452 @@
+*{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: rgb(5, 15, 44);
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: white; 
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: white; 
+}
+
+.breadcrumb {
+  padding: 0vw 0vw 0.4vw 1vw;
+  list-style: none;
+  background-color: whitesmoke;
+}
+.breadcrumb li {
+  display: inline;
+  font-size: 0.8vw;
+  color: black;
+}
+.breadcrumb li+li:before {
+  color: black;
+  content: "/\00a0";
+  padding: 0.5vw;
+}
+.breadcrumb li a {
+  color: black;
+  text-decoration: none;
+}
+.breadcrumb li a:hover {
+  color: grey;
+}
+
+body {
+    margin: 0 ;
+	width: 100%;
+    font-family: 'Roboto', sans-serif;
+    background-color: white;
+    overflow-x: hidden;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'para para para para para para'
+    'header header header header header header'
+    'brand brand brand brand brand brand'
+    'manu manu manu manu manu manu'
+    'products products products products products products'
+    'foot foot foot foot foot foot';
+  grid-gap: 5vw;
+  background-color: white;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  margin-top: 11vw;
+}
+
+
+.item1 { grid-area: header; }
+.item2 { grid-area: brand; }
+.item7 { grid-area: products; text-align: center; }
+.item8 { grid-area: foot; text-align: center; }
+.item6 { grid-area: manu; text-align: center;}
+
+
+
+.item1{
+    margin-top: 40px;
+    width: 97.5vw;
+    height: 50vw;
+    background: url(/images/women-boot.jpg) no-repeat;
+    margin-bottom: 30px;
+    background-size:cover;
+    background-position:center center;
+}
+
+.item6{
+    margin-bottom: 30px;
+    width: 97.5vw;
+    height: 50vw;
+    background: url(/images/women-shirts.jpg) no-repeat;
+    background-size:cover;
+    background-position:center center;
+}
+
+.item8{
+    margin-bottom: 30px;
+    width: 97.5vw;
+    height: 50vw;
+    background: url(/images/gear.jpg) no-repeat;
+    background-size:cover;
+    background-position:center center;
+}
+
+
+.item6 a,.item1 a,.item8 a{
+    text-decoration: none;
+}
+
+
+/* .text{
+    color: white;
+    text-align: left;
+    top: 480px;
+    left: 80px;
+    position: relative;
+    font-size: 110px;
+    font-weight: 800;
+    letter-spacing: -6px;
+    width: 100%;
+} */
+/* .main-shop{
+    background-color: white;
+    color: rgb(5, 15, 44);
+    text-align: center;
+    padding: 10px 10px 12px 10px;
+    font-size: 15px;
+    font-weight: 350;
+    width: 80px;
+    border-radius: 30px;
+    top: 470px;
+    left: 80px;
+    position: relative;
+} */
+
+
+.text1{
+    color: white;
+    text-align: left;
+    top: 34vw;
+    left: 3.5vw;
+    position: relative;
+    font-size: 7vw;
+    font-weight: 800;
+    letter-spacing: -6px;
+    width: 100%;
+}
+
+.main-shop1{
+    background-color: white;
+    color: rgb(5, 15, 44);
+    text-align: center;
+    padding: 1vw 1.5vw 1vw 1.5vw;
+    font-size: 1.1vw;
+    font-weight: 350;
+    width: fit-content;
+    border-radius: 30px;
+    top: 33vw;
+    left: 4vw;
+    position: relative;
+}
+
+.main-shop1:hover{
+    opacity: 0.9;
+    background-color: rgb(5, 15, 44); 
+    color: whitesmoke;
+    transition: ease-in-out 400ms;
+}
+
+
+.item4{
+    min-height: 1000px;
+    max-height: 1800px;
+}
+
+.item2 .latest-nike{
+    margin-bottom: 10%;
+	grid-area: latest-nike;
+	background-color: #FFF;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.25);
+}
+
+.item2 .latest-puma{
+    margin-bottom: 1%;
+	grid-area: latest-puma;
+	background-color: #FFF;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.25);
+}
+
+
+.item2 .latest-adidas{
+    margin-bottom: 1%;
+	grid-area: latest-adidas;
+	background-color: #FFF;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.25);
+}
+
+
+.new{
+    padding: 10px 5px;
+    text-align: center;
+    font-size: 1.5vw;
+    font-weight: 400;
+}
+
+.landed img{
+    width: 40vw;
+    height: 25vw;
+}
+
+.item7 .landed{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1vw;
+    width: 96.5vw;
+}
+
+.item7 .latest-nike{
+    margin-bottom: 1%;
+	
+	background-color: #FFF;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.25);
+}
+
+.item7 .latest-puma{
+    margin-bottom: 1%;
+	
+	background-color: #FFF;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.25);
+}
+
+
+.item7 .latest-adidas{
+    margin-bottom: 15%;
+	
+	background-color: #FFF;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.25);
+}
+
+
+.item7 .new{
+    text-align: center;
+    font-size: 1vw;
+    font-weight: 400;
+}
+
+.item7 .landed img{
+    width: 12vw;
+    height: 12vw;
+    background-color: rgb(245, 245, 245);
+    padding: 50px;
+}
+
+.item7 .landed button{
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    padding: 0.8vw 1vw 0.8vw 1vw;
+    border-radius: 2px;
+}
+
+.item7 .landed button:hover{
+    cursor: pointer;
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+    padding: 0.8vw 1vw 0.8vw 1vw;
+}
+
+.item9{
+    grid-area: para;
+}
+
+.item9 p{
+    font: inherit;
+    font-size: 1vw;
+    text-align: center;
+    margin-bottom: 50px;
+    letter-spacing: 1px;
+    margin-top: -2vw;
+    width: fit-content;
+    left: 40vw;
+    position: relative;
+}
+
+.item9 h2 {
+	font-size: 3.5vw;
+    font-weight: 480;
+    padding: 0 3vw;
+    text-align: center;
+    width: fit-content;
+    left: 41vw;
+    position: relative;
+}
+
+.landed button{
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    padding: 1vw 1.5vw 1vw 1.5vw;
+    border-radius: 2px;
+}
+
+.landed button:hover{
+    cursor: pointer;
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+    padding: 1vw 1.5vw 1vw 1.5vw;
+}
+
+.landed{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "latest-nike latest-adidas"
+    "latest-puma latest-puma";
+    padding: 25px 0px;
+    width: 96.5vw;
+}
+
+.just-landed{
+    text-align: left;
+    display: block;
+}
+
+.just-landed h1{
+    font-weight: 470;
+    font-size: 1.8vw;
+    margin-bottom: -10px;
+}
+
+*{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+.product-card {
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.25);
+    display: inline-block;
+    margin: 8px;
+    height: 30vw;
+}
+
+.product-card:hover{
+    box-shadow: 0px 0px 0.5px 0px black;
+}
+
+.product-info .colour{
+    display: none;
+}
+
+.product-info{
+    display: grid;
+  grid-template-areas:
+    'header price'
+    'main main';
+  width: 100%;
+  margin-top: 0.3vw;
+}
+
+.product-info h5{
+    grid-area: header;
+    font-weight: 350;
+    margin: 0;
+    width: 20vw;
+    color: black;
+    font-size: 1.2vw;
+}
+
+.product-info .price{
+    grid-area: price;
+    text-align: right;
+    font-weight: 450;
+    margin: 0;
+    color: black;
+    font-size: 1.2vw;
+}
+
+.product-info .category{
+    grid-area: main;
+    color: rgb(155, 155, 155);
+    font-size: 1vw;
+    line-height: 0;
+    margin: 0;
+    padding: 15px 0;
+}
+
+
+.product-card img {
+    width: 24vw;
+    height: 24vw;
+}
+
+.product-image{
+    opacity: 1;
+    position: relative;
+}
+
+
+body a{
+    text-decoration: none;
+}
+
+.scrolling-wrapper {
+    overflow-x: scroll;
+    white-space: nowrap;
+    height: 35vw;
+    margin-bottom: 2vw;
+    overflow-y: hidden;
+    width: 88%;
+    margin-left: 3vw;
+}
+
+/* Track */
+.scrolling-wrapper::-webkit-scrollbar-track {
+  background-color: white;
+  scrollbar-width: thin;
+}
+ 
+/* Handle */
+.scrolling-wrapper::-webkit-scrollbar-thumb {
+  background: black; 
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+.scrolling-wrapper::-webkit-scrollbar-thumb:hover {
+  background: grey;
+  cursor: pointer;
+}
+
+.scrolling-wrapper::-webkit-scrollbar {
+  height: 5px;;
+}
+
+.recent{
+    font-size: 1.5vw;
+    margin: 0;
+    font-weight: 400;
+    padding: 1vw 0;
+    text-align: center;
+    width: fit-content;
+}
+
+.item2{
+    text-align: left;
+}
